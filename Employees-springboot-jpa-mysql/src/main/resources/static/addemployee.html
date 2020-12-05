@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html class="x-admin-sm">
+
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
+<link rel="stylesheet" href="./css/font.css">
+<link rel="stylesheet" href="./css/xadmin.css">
+<script type="text/javascript" src="./lib/layui/layui.js"
+	charset="utf-8"></script>
+<script type="text/javascript" src="./js/xadmin.js"></script>
+</head>
+
+<body>
+	<div class="layui-fluid">
+		<div class="layui-row">
+			<form name="form" id="form" action="./addprogram" method="post"
+				enctype="multipart/form-data" class="layui-form">
+				<div class="layui-form-item">
+					<label for="username" class="layui-form-label"> <span
+						class="x-red">*</span>标题
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="title" name="title" required=""
+							lay-verify="required" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="username" class="layui-form-label"> <span
+						class="x-red">*</span>价格
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="price" name="price" required=""
+							lay-verify="required" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="username" class="layui-form-label"> <span
+						class="x-red">*</span>项目地址
+					</label>
+					<div class="layui-input-inline">
+						<input type="text" id="url" name="url" required=""
+							lay-verify="required" autocomplete="off" class="layui-input">
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="username" class="layui-form-label"> <span
+						class="x-red">*</span>分类
+					</label>
+					<div class="layui-input-inline">
+						<select id="classify" name="classify" class="valid">
+							<option value="shentong">Servlet</option>
+							<option value="shunfeng">SpringBoot</option>
+						</select>
+					</div>
+				</div>
+				<div class="layui-form-item layui-form-text">
+					<label for="desc" class="layui-form-label">描述</label>
+					<div class="layui-input-block">
+						<textarea placeholder="请输入内容" id="info" name="info"
+							class="layui-textarea"></textarea>
+					</div>
+				</div>
+				<div class="layui-form-item">
+					<label for="L_repass" class="layui-form-label"></label> <input
+						type="submit" id="submitBtn" onclick="checkSubmit()" value="增加" />
+				</div>
+				<input type="file" name="fileName" id="filename"
+					accept="image/png, image/jpeg, image/jpg" multiple="multiple"
+					onchange="checkImage(this)">
+			</form>
+			<div id="onLoadImage"></div>
+		</div>
+	</div>
+	<script>
+		layui.use([ 'form', 'layer' ], function() {
+			form.on('submit(add)', function(data) {
+				console.log(data);
+				return false;
+			});
+
+		});
+	</script>
+</body>
+<script type="text/javascript"
+	src="https://cdn.bootcss.com/jquery/3.2.1/jquery.js"></script>
+<script type="text/javascript">
+    var curFiles = [];//文件数组，用来保存上传的文件信息
+    function checkImage(obj) {
+        var files = obj.files;
+        console.log(files.length);
+        if(files){
+
+            if(files.length <= 20) {//把一次上传图片数限制在3张
+                for (var i = 0; i < files.length; i++) {
+                    var item = files.item(i);
+                    var size = item.size;
+                    if (size / 1000 < 1000) { //简易大小限制10000K
+                        curFiles.push(item);
+                    }
+                    else {
+                        alert("第" + (i + 1) + "张图片过大");
+                    }
+                }
+            }
+            else{
+                $("#filename").val("");
+                alert("一次最多上传3张图片");
+            }
+        }
+        else {
+            $("#filename").val("");
+            alert("请选择上传文件");
+        }
+        for (var i = 0; i < curFiles.length - 1; i++) {
+            for (var j = 1; j < curFiles.length; j++) {
+                if (i != j) {
+                    if (curFiles[i].name == curFiles[j].name) {
+                        curFiles.splice(j, 1)
+                    }
+                }
+            }
+        }
+        for(var i = 0; i < curFiles.length; i++){
+            var size = curFiles[i].size;
+            if(size/1000>100){
+                curFiles.splice(i, 1);
+            }
+
+        }
+        console.log(curFiles);
+        onLoadImage();
+    }
+    function onLoadImage() {
+        $("#onLoadImage").html("");
+        for(var i = 0; i < curFiles.length; i++){
+            (function(i){
+                var file = curFiles[i];
+                var reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onload = function(){
+                    $('#onLoadImage').append("<img src='"+reader.result+"'/><span><span>"+file.name+"</span><button id='"+i+"' onclick='del(this.id)'>删除</button></span><br>");
+                }
+            })(i)
+        }
+    }
+    //删除功能
+    function del(id) {
+        var name = $("#"+id).prev().text();
+        console.log(name);
+        curFiles = curFiles.filter(function(file) {
+            return file.name !== name;
+        });
+        console.log(curFiles);
+        onLoadImage();
+    }
+
+    //上传功能的实现
+    function checkSubmit() {
+        if(curFiles.length>0){
+            var formdata =  new FormData($('#form')[0]);
+            for (var i = 0; i<curFiles.length; i++) {
+                formdata.append('uploadFiles', curFiles[i]);
+            }
+            console.log(formdata);
+            $.ajax({
+                url: 'addprogram',
+                type: 'post',
+                data: formdata,
+                processData: false,
+                contentType: false,
+                success: function(data) {
+                    alert(data.length+"个上传结果");
+                    for(var k in data){
+                        var num=Number(k)+1;
+                        alert("第"+num+"张上传结果："+data[k].result_msg);
+                        if(data[k].hasOwnProperty("relativePath"))
+                            alert("第"+num+"张相对路径："+data[k].relativePath);
+                    }
+                },
+                error: function(err) {
+                    alert("上传失败");
+                }
+            });
+        }
+        else{
+            alert("请选择文件后上传");
+        }
+    }
+
+</script>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="meta description">
+<title>诗航程序小铺</title>
+<link rel="shortcut icon" href="assets/img/favicon.ico"
+	type="image/x-icon" />
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i,700,900%7CYesteryear"
+	rel="stylesheet">
+<link href="assets/css/vendor.css" rel="stylesheet">
+<!-- Main Style CSS -->
+<link href="assets/css/style.css" rel="stylesheet">
+</head>
+
+<style type="text/css">
+html {
+	font-family: sans-serif;
+	-ms-text-size-adjust: 100%;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 10px;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+td, th {
+	padding: 0;
+}
+
+.pure-table {
+	border-collapse: collapse;
+	border-spacing: 0;
+	empty-cells: show;
+	border: 1px solid #cbcbcb;
+}
+
+.pure-table caption {
+	color: #000;
+	font: italic 85%/1 arial, sans-serif;
+	padding: 1em 0;
+	text-align: center;
+}
+
+.pure-table td, .pure-table th {
+	border-left: 1px solid #cbcbcb;
+	border-width: 0 0 0 1px;
+	font-size: inherit;
+	margin: 0;
+	overflow: visible;
+	padding: .5em 1em;
+}
+	
+	.pure-table thead {
+		background-color: #e0e0e0;
+		color: #000;
+		text-align: left;
+		vertical-align: bottom;
+	}
+	
+	.pure-table td {
+		background-color: transparent;
+	}
+
+</style>
+<body>
+	<!-- Start Header Area -->
+	<header class="header-area">
+		<!-- main header start -->
+		<div class="main-header d-none d-lg-block">
+			<!-- header middle area start -->
+			<div class="header-main-area sticky">
+				<div class="container">
+					<div class="row align-items-center position-relative">
+						<!-- start logo area -->
+						<div class="col-lg-3">
+							<div class="logo">
+								<a href=""> <img src="images/2.jpg" alt=""
+									style="height: 100px; width: 100px;">
+								</a>
+							</div>
+						</div>
+						<!-- start logo area -->
+						<!-- main menu area start -->
+						<div class="col-lg-6 position-static">
+							<div class="main-menu-area">
+								<div class="main-menu">
+									<!-- main menu navbar start -->
+									<nav class="desktop-menu">
+										<ul>
+											<li><a href="shop.html" style="font-size: 40px;"></a></li>
+										</ul>
+									</nav>
+									<!-- main menu navbar end -->
+								</div>
+							</div>
+						</div>
+						<!-- main menu area end -->
+						<!-- mini cart area start -->
+						<div class="col-lg-3">
+							<div class="header-configure-wrapper">
+								<div class="header-configure-area"></div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- header middle area end -->
+		</div>
+	</header>
+
+	<!-- main wrapper start -->
+	<main>
+		<!-- breadcrumb area start -->
+		<div class="breadcrumb-area common-bg"
+			style="background-image: url('./images/3.jpg');">
+			<div class="container">
+				<div class="row">
+					<div class="col-12">
+						<div class="breadcrumb-wrap">
+							<nav aria-label="breadcrumb">
+								<h1>网上考试报名系统</h1>
+							</nav>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- breadcrumb area end -->
+
+		<!-- page main wrapper start -->
+		<div class="shop-main-wrapper section-space pb-0">
+			<div class="container">
+				<div class="row">
+					<!-- sidebar area start -->
+					<div class="col-lg-3 order-2 order-lg-1">
+						<aside class="sidebar-wrapper">
+							<!-- single sidebar start -->
+							<div class="sidebar-single">
+								<h3 class="sidebar-title">分类</h3>
+								<div class="sidebar-body">
+									<ul class="shop-categories">
+										<li><a href="./fenlei?fenlei=大学英语四六级">大学英语四六级 <span></span></a></li>
+										<li><a href="./fenlei?fenlei=校内考试">校内考试 <span></span></a></li>
+										<li><a href="./fenlei?fenlei=全国计算机等级考试">全国计算机等级考试<span></span></a></li>
+										<li><a href="./fenlei?fenlei=普通话水平测试">普通话水平测试<span></span></a></li>
+										<li><a href="./fenlei?fenlei=MHK考试">MHK考试 <span></span></a></li>
+									</ul>
+								</div>
+							</div>
+							<div class="sidebar-banner">
+								<div class="img-container">
+									<a href="#"> <img src="../file/bg.png" alt="">
+									</a>
+								</div>
+							</div>
+							<!-- single sidebar end -->
+						</aside>
+					</div>
+					<!-- sidebar area end -->
+
+					<!-- shop main wrapper start -->
+					<div class="col-lg-9 order-1 order-lg-2">
+						<div class="shop-product-wrapper">
+							<!-- shop product top wrap start -->
+							<div class="shop-top-bar">
+								<div class="row align-items-center">
+									<div class="col-lg-7 col-md-6 order-2 order-md-1">
+										<div class="top-bar-left">
+											<p style="font-size: 20px;"></p>
+											<div class="product-amount">
+												<form>
+													<input type="text" />&nbsp;<input type="submit" value="搜索" />
+												</form>
+											</div>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<!-- shop product top wrap start -->
+							<table class="pure-table"  th:each="temp:${list}">
+								<thead>
+									<tr style="font-size: 20px;">
+										<th style="width: 70%;" th:text="${temp.title}"></th>
+										<th th:text="${temp.name}"></th>
+										<th th:text="${temp.date}">2020.09.20</th>
+									</tr>
+								</thead>
+							</table>
+							<div class="shop-product-wrap grid-view row mbn-40">
+								<!-- product single item start -->
+								<div class="col-md-4 col-sm-6" th:each="temp:${list}"></div>
+							</div>
+						</div>
+						<!-- product item list wrapper end -->
+						<!-- start pagination area -->
+						<div class="paginatoin-area text-center">
+							<ul class="pagination-box">
+								<li><a class="previous" href="#"><i
+										class="lnr lnr-chevron-left"></i></a></li>
+								<li><a href="#">2</a></li>
+								<li><a class="next" href="#"><i
+										class="lnr lnr-chevron-right"></i></a></li>
+							</ul>
+						</div>
+						<!-- end pagination area -->
+					</div>
+				</div>
+				<!-- shop main wrapper end -->
+			</div>
+		</div>
+		</div>
+		<!-- page main wrapper end -->
+	</main>
+	<!-- main wrapper end -->
+
+	<!-- Start Footer Area Wrapper -->
+	<footer class="footer-wrapper"> </footer>
+	<script src="assets/js/vendor.js"></script>
+	<!-- Active Js -->
+	<script src="assets/js/active.js"></script>
+</body>
+
+</html>

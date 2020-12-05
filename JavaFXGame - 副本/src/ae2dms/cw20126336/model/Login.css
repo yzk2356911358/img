@@ -1,0 +1,7 @@
+.root {
+ -fx-background-image: url("bg.jpg");
+}
+.button{
+    -fx-font: 20 arial; 
+    -fx-base: #ee2211;    
+}

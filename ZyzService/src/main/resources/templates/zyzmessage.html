@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="renderer" content="webkit">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport"
+	content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<title>网站后台管理模版</title>
+<link rel="stylesheet" type="text/css"
+	href="../../static/admin/layui/css/layui.css" />
+<link rel="stylesheet" type="text/css"
+	href="../../static/admin/css/admin.css" />
+</head>
+<body>
+	<div class="layui-tab page-content-wrap">
+		<ul class="layui-tab-title">
+			<li class="layui-this">修改资料</li>
+		</ul>
+		<div class="layui-tab-content">
+			<div class="layui-tab-item layui-show">
+				<form class="layui-form" style="width: 90%; padding-top: 20px;"
+					action="./upzyzmessage" method="post">
+					<div class="layui-form-item">
+						<label class="layui-form-label">ID：</label>
+						<div class="layui-input-block">
+							<input type="text" name="id" class="layui-input layui-disabled"
+								th:value="${zyz.id}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">用户名：</label>
+						<div class="layui-input-block">
+							<input type="text" name="username"
+								class="layui-input layui-disabled" th:value="${zyz.username}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">邮箱：</label>
+						<div class="layui-input-block">
+							<input type="text" name="email"
+								class="layui-input layui-disabled" th:value="${zyz.email}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">密码：</label>
+						<div class="layui-input-block">
+							<input type="text" name="password" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.password}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">国家/地区：</label>
+						<div class="layui-input-block">
+							<input type="text" name="gj" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.gj}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">真实姓名：</label>
+						<div class="layui-input-block">
+							<input type="text" name="name" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.name}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">身份证号：</label>
+						<div class="layui-input-block">
+							<input type="text" name="card" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.card}">
+						</div>
+					</div>
+					
+					<div class="layui-form-item" th:switch="${zyz.gender}">
+						<label class="layui-form-label">性别：</label>
+						<div class="layui-input-block" th:case="'男'">
+						 <input name="gender"  type="text" list="sexlist2" placeholder="男"  lay-verify="required" class="layui-input">
+						<datalist id="sexlist2">
+							<option selected="selected">男</option>
+							<option selected="selected">女</option>
+						</datalist>
+						</div>
+						<div class="layui-input-block" th:case="'女'">
+						 <input name="gender"  type="text" list="sexlist2" placeholder="女"  lay-verify="required" class="layui-input">
+						<datalist id="sexlist2">
+							<option selected="selected">女</option>
+							<option selected="selected">男</option>
+						</datalist>
+						</div>
+						<div class="layui-input-block" th:case="''">
+						 <input name="gender"  type="text" list="sexlist2" placeholder="请选择性别"  lay-verify="required" class="layui-input">
+						<datalist id="sexlist2">
+							<option selected="selected">女</option>
+							<option selected="selected">男</option>
+						</datalist>
+						</div>
+					</div>
+					<div class="layui-form-item" th:switch="${zyz.zzmm}">
+						<label class="layui-form-label">政治面貌：</label>
+						<div class="layui-input-block" th:case="'群众'">
+						 <input name="zzmm"  type="text" list="sexlist3" placeholder="群众"   lay-verify="required" class="layui-input">
+						<datalist id="sexlist3">
+							<option selected="selected">群众</option>
+							<option>党员</option>
+						</datalist>
+						</div>
+						<div class="layui-input-block" th:case="'党员'">
+						 <input name="zzmm"  type="text" list="sexlist3" placeholder="党员"  lay-verify="required" class="layui-input">
+						<datalist id="sexlist3">
+							<option selected="selected">党员</option>
+							<option>群众</option>
+						</datalist>
+						</div>
+						<div class="layui-input-block" th:case="''">
+						 <input name="zzmm"  type="text" list="sexlist3" placeholder="请选择政治面貌"   lay-verify="required" class="layui-input">
+						<datalist id="sexlist3">
+							<option selected="selected">党员</option>
+							<option>群众</option>
+						</datalist>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">汉族：</label>
+						<div class="layui-input-block">
+							<input type="text" name="mz" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.mz}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">籍贯：</label>
+						<div class="layui-input-block">
+							<input type="text" name="jg" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.jg}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">手机号：</label>
+						<div class="layui-input-block">
+							<input type="text" name="tel" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.tel}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">居住地址：</label>
+						<div class="layui-input-block">
+							<input type="text" name="addres" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.addres}">
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<label class="layui-form-label">最高学历：</label>
+						<div class="layui-input-block">
+							<input type="text" name="xl" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.xl}">
+						</div>
+					</div>
+
+					<div class="layui-form-item">
+						<label class="layui-form-label">从业状况：</label>
+						<div class="layui-input-block">
+							<input type="text" name="cyzk" required lay-verify="required"
+								placeholder="请输入" autocomplete="off" class="layui-input"
+								th:value="${zyz.cyzk}">
+						</div>
+					</div>
+					<div class="layui-form-item layui-form-text">
+						<label class="layui-form-label">服务行业及领域：</label>
+						<div class="layui-input-block">
+							<textarea name="fwqu" placeholder="请输入内容" class="layui-textarea"
+								th:text="${zyz.fwqu}"></textarea>
+						</div>
+					</div>
+					<div class="layui-form-item">
+						<div class="layui-input-block">
+							<button class="layui-btn layui-btn-normal" lay-submit
+								lay-filter="adminInfo">立即提交</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script src="../../static/admin/layui/layui.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</body>
+</html>
